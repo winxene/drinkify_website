@@ -19,7 +19,18 @@ img {
   @apply h-64 w-64 rounded-full;
 }
 
-/* body {
-  @apply font-family-nunito;
-} */
+.container {
+  width: 100%;
+  padding: 0 1.5rem;
+
+  @apply lg:max-w-5xl lg:mx-auto;
+}
+
+.item {
+  @apply lg:flex lg:items-center lg:justify-between;
+}
+
+.sidebar {
+  @apply lg:hidden;
+}
 
