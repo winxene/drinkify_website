@@ -11,7 +11,6 @@ const HomePage = () => {
   const [showTokenString, setShowTokenString] = React.useState(false);
   const [token, setTokenString] = React.useState('');
   
-
   //randomize 16 string
   function generateString(length) {
     var result           = '';
@@ -57,17 +56,16 @@ const HomePage = () => {
   };
   
   const copyTokenStringToClipboard = () => {CopyToClipboard(token)};
-  
   return (
-    // <div className="flex justify-center items-center h-screen p-4">
-    <div className="flex justify-center items-center h-screen p-4">
+    <div className="flex justify-center items-center h-screen p-4 bg-black flex-col">
       <button onClick={generateQRCode}>Generate QR code</button>
-      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} /> : <p className="text-sm text-slate-900 break-words">QR code will be shown here</p>}
+      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} /> : <p className="text-sm text-white break-words">QR code will be shown here</p>}
       <button onClick={toggleShowTokenString}> show token string </button>
       { showTokenString && (
-        <div>
-        <p>{token}</p>
-        <button onClick={copyTokenStringToClipboard}><ContentCopyIcon></ContentCopyIcon></button>
+        <div className = "d-flex align-items-center">
+          <p className= "text-white mr-2">{token} 
+          <button onClick={copyTokenStringToClipboard}><ContentCopyIcon></ContentCopyIcon></button>
+          </p>
         </div>
       )}
     </div>
