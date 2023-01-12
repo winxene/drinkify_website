@@ -5,6 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { initializeApp } from 'firebase/app' // no compat for new SDK
 import { getDatabase, onValue, ref, update } from 'firebase/database'
 
+import image from '../assets/drinkify_logo.png';
 const HomePage = () => {
   const [qrCodeUrl, setQRCodeUrl] = React.useState(null);
   const [showQRCode, setShowQRCode] = React.useState(true);
@@ -57,17 +58,24 @@ const HomePage = () => {
   
   const copyTokenStringToClipboard = () => {CopyToClipboard(token)};
   return (
-    <div className="flex justify-center items-center h-screen p-4 bg-black flex-col">
+    <div className="flex justify-center items-center h-screen p-screen bg-black flex-col">
+      <img src={image} alt= "drinkify logo" width="300" height="300" className= 'm-3' /> 
       <button onClick={generateQRCode}>Generate QR code</button>
-      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} /> : <p className="text-sm text-white break-words">QR code will be shown here</p>}
-      <button onClick={toggleShowTokenString}> show token string </button>
+      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} className='m-4'/> :
+        <p className="text-sm text-white break-words m-5">QR code will be shown here</p>
+      }
+      {
+       qrCodeUrl? <button onClick={toggleShowTokenString} className= "m-6"> show token string </button> : null 
+      }
       { showTokenString && (
-        <div className = "d-flex align-items-center">
+        <div className = "d-flex align-items-center mx-16">
           <p className= "text-white mr-2">{token} 
-          <button onClick={copyTokenStringToClipboard}><ContentCopyIcon></ContentCopyIcon></button>
+          <button className= "ml-2" onClick={copyTokenStringToClipboard}><ContentCopyIcon></ContentCopyIcon></button>
           </p>
         </div>
       )}
+    <p className='text-white font-bold'>Created by:</p>
+      <p className= 'text-white'>Vincent, Vendy, and Winxen</p>
     </div>
   );
 }
