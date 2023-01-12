@@ -66,7 +66,7 @@ const HomePage = () => {
         <p className="text-sm text-white break-words m-5">QR code will be shown here</p>
       }
       {
-       qrCodeUrl? <button onClick={toggleShowTokenString} className= "m-6"> show token string </button> : null 
+       showQRCode && qrCodeUrl? <button onClick={toggleShowTokenString} className= "m-6"> show token string </button> : null 
       }
       { showTokenString && (
         <div className = "d-flex align-items-center mx-16">
