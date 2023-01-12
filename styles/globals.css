@@ -3,15 +3,15 @@
 @import "tailwindcss/utilities";
 
 button {
-  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-full;
+  @apply bg-emerald-400 text-white font-bold py-2 px-4 rounded-full;
 }
 
 button:hover {
-  @apply bg-blue-700;
+  @apply bg-emerald-200;
 }
 
 button:active {
-  @apply bg-blue-800;
+  @apply bg-green-600;
 }
 
 img {
@@ -21,7 +21,6 @@ img {
 .container {
   width: 100%;
   padding: 0 1.5rem;
-
   @apply lg:max-w-5xl lg:mx-auto;
 }
 
