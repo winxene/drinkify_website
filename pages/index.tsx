@@ -1,15 +1,17 @@
 import React from 'react';
 import qrcode from 'qrcode';
 import CopyToClipboard from 'copy-to-clipboard';
-import {IconButton} from '@material-ui/core';
-import CopyIcon from '@material-ui/core/Icon/Icon';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { initializeApp } from 'firebase/app' // no compat for new SDK
-import { getDatabase, ref, set, update } from 'firebase/database'
+import { getDatabase, onValue, ref, update } from 'firebase/database'
 
 const HomePage = () => {
   const [qrCodeUrl, setQRCodeUrl] = React.useState(null);
   const [showQRCode, setShowQRCode] = React.useState(true);
   const [showTokenString, setShowTokenString] = React.useState(false);
+  const [token, setTokenString] = React.useState('');
+  
+
   //randomize 16 string
   function generateString(length) {
     var result           = '';
@@ -25,6 +27,7 @@ const HomePage = () => {
   const app = initializeApp(firebaseConfig);
   const drinkifyDatabase = getDatabase(app);  
   const drinkifyTokenRef = ref(drinkifyDatabase, '/balanceToken');
+  const drinkifyTokenReadRef = ref(drinkifyDatabase, '/balanceToken/5k');
   const generateQRCode = () => {
     qrcode.toDataURL(tokenStringData).then(qrCodeUrl => {
       setQRCodeUrl(qrCodeUrl);
@@ -35,17 +38,36 @@ const HomePage = () => {
     setTimeout(() => {
       setShowQRCode(false);
     }, 30000);
-  });
-};
+  });};
+  
+  const getTokenString = () => {
+    onValue(drinkifyTokenReadRef, (snapshot) => {
+      if(snapshot.exists()){
+      setTokenString(snapshot.val()); 
+      }
+      else {
+        console.log("No data Available");
+      }
+    });
+  }
+  
+  const toggleShowTokenString = () =>{
+    setShowTokenString(!showTokenString)
+    getTokenString();
+  };
+  
+  const copyTokenStringToClipboard = () => {CopyToClipboard(token)};
+  
   return (
+    // <div className="flex justify-center items-center h-screen p-4">
     <div className="flex justify-center items-center h-screen p-4">
       <button onClick={generateQRCode}>Generate QR code</button>
-      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} /> : <p>QR code will be shown here</p>}
-      <button onClick={() => setShowTokenString(!showTokenString)}> show token string </button>
+      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} /> : <p className="text-sm text-slate-900 break-words">QR code will be shown here</p>}
+      <button onClick={toggleShowTokenString}> show token string </button>
       { showTokenString && (
         <div>
-        <p>{tokenStringData}</p>
-        <IconButton onClick={() => CopyToClipboard(tokenStringData)}><CopyIcon /></IconButton>
+        <p>{token}</p>
+        <button onClick={copyTokenStringToClipboard}><ContentCopyIcon></ContentCopyIcon></button>
         </div>
       )}
     </div>
