@@ -1,11 +1,12 @@
 import React from 'react';
 import qrcode from 'qrcode';
+import Image from 'next/image'
 import CopyToClipboard from 'copy-to-clipboard';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { initializeApp } from 'firebase/app' // no compat for new SDK
 import { getDatabase, onValue, ref, update } from 'firebase/database'
+import drinkifyPic from '../assets/drinkify_logo.png';
 
-import image from '../assets/drinkify_logo.png';
 const HomePage = () => {
   const [qrCodeUrl, setQRCodeUrl] = React.useState(null);
   const [showQRCode, setShowQRCode] = React.useState(true);
@@ -59,9 +60,9 @@ const HomePage = () => {
   const copyTokenStringToClipboard = () => {CopyToClipboard(token)};
   return (
     <div className="flex justify-center items-center h-screen p-screen bg-black flex-col">
-      <img src={image} alt= "drinkify logo" width="300" height="300" className= 'm-3' /> 
+      <Image className= "h-48 w-96" src ={drinkifyPic} alt ="Drinkify Logo" />
       <button onClick={generateQRCode}>Generate QR code</button>
-      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} className='m-4'/> :
+      {showQRCode && qrCodeUrl ? <img src={qrCodeUrl} className='h-64 w-64 m-4 rounded-full '/> :
         <p className="text-sm text-white break-words m-5">QR code will be shown here</p>
       }
       {
