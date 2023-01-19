@@ -14,7 +14,7 @@ const HomePage = () => {
   const [token, setTokenString] = React.useState('');
   
   //randomize 16 string
-  function generateString(length) {
+  function generateString(length: Number) {
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
