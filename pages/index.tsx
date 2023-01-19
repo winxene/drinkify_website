@@ -8,7 +8,7 @@ import { getDatabase, onValue, ref, update } from 'firebase/database'
 import drinkifyPic from '../assets/drinkify_logo.png';
 
 const HomePage = () => {
-  const [qrCodeUrl, setQRCodeUrl] = React.useState(null);
+  const [qrCodeUrl, setQRCodeUrl] = React.useState<string>('');
   const [showQRCode, setShowQRCode] = React.useState(true);
   const [showTokenString, setShowTokenString] = React.useState(false);
   const [token, setTokenString] = React.useState('');
