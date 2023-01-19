@@ -17,5 +17,5 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/**/*.ts", "config/firebaseConfig.ts"],
   "exclude": ["node_modules"],
-  "files": ["src/pages/_app.tsx",  "src/pages/index.tsx", "src/pages/api/hello.ts", "config/firebaseConfig.ts"]
+  "files": ["config/firebaseConfig.ts"]
 }
