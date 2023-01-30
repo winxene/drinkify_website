@@ -1,5 +1,5 @@
 ## Notes
-A website created to simulate the payment gateway of Drinkify. This project is complements to the Drinkify projects related to the tr-iot and tr-mobile-app repository. 
+A website created to simulate the payment gateway of Drinkify. This project complements to the Drinkify projects related to the tr-iot and tr-mobile-app repository. 
 
 Links to repo:
 - tr-iot        (Microcontroller code for Drinkify) : https://github.com/winxene/tr-iot
